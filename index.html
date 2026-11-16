@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f7f6f2">
+<meta name="description" content="دفاتر الصف الأول الثانوي وتحديدات الاختبارات في مكان واحد.">
+<title>دروسي | الصف الأول الثانوي</title>
+<style>
+:root{--bg:#f7f6f2;--paper:#fff;--ink:#17171c;--muted:#74777e;--line:#e6e4dd;--blue:#174d7a;--shadow:0 1px 2px #20202008}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Tahoma,Arial,sans-serif}
+button,a{font:inherit}
+button{cursor:pointer}
+.topbar{height:76px;position:sticky;top:0;z-index:5;background:rgba(247,246,242,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(18px,4vw,42px)}
+.brand{display:flex;align-items:center;gap:12px;color:var(--ink);text-decoration:none;font-size:30px;font-weight:900}
+.brand-icon{font-size:37px;line-height:1}
+.exam-link{border:0;background:transparent;color:#62646b;padding:10px 0;font-size:16px;text-decoration:none}
+.exam-link:hover{color:var(--blue)}
+main{max-width:1120px;margin:auto;padding:44px clamp(18px,4vw,42px) 70px}
+.hero{margin-bottom:64px}
+.hero-brand{display:flex;align-items:center;gap:15px;margin-bottom:26px}
+.hero-brand .brand-icon{font-size:54px}
+.hero-brand h1{font-size:clamp(38px,7vw,58px);margin:0;font-weight:900;line-height:1.2}
+.tagline{color:var(--blue);font-size:18px;font-weight:700;margin-top:4px}
+.intro{font-size:clamp(19px,3vw,27px);line-height:1.9;color:#55565d;margin:0;max-width:850px}
+.section-title{font-size:25px;color:#646873;margin:0 0 26px;font-weight:800}
+.subject-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.subject-card{min-height:184px;background:var(--paper);border:2px solid var(--line);border-radius:30px;padding:28px 26px 23px;text-align:right;display:flex;flex-direction:column;align-items:stretch;justify-content:space-between;box-shadow:var(--shadow);transition:transform .18s,border-color .18s;position:relative;color:var(--ink)}
+.subject-card:hover{transform:translateY(-3px);border-color:#c9d8d4}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start}
+.subject-icon{width:76px;height:76px;border-radius:23px;display:grid;place-items:center;font-size:35px}
+.chevron{font-size:27px;color:#a4a8ad;line-height:1}
+.subject-name{font-size:clamp(21px,3vw,28px);font-weight:900;margin-top:20px}
+.subject-count{font-size:17px;color:var(--muted);margin-top:8px}
+.page-head{margin-bottom:28px}
+.back{display:inline-block;color:var(--blue);text-decoration:none;font-size:19px;font-weight:700;margin-bottom:32px}
+.page-title-row{display:flex;align-items:center;gap:18px}
+.page-title-row h2{font-size:clamp(32px,6vw,48px);margin:0;font-weight:900}
+.page-subtitle{color:var(--muted);font-size:19px;margin:7px 0 0}
+.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.photo-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:10px;overflow:hidden}
+.photo-card img{width:100%;height:auto;max-height:620px;object-fit:contain;display:block;border-radius:14px;background:#f0efeb;cursor:zoom-in}
+.photo-actions{display:flex;justify-content:flex-start;padding:10px 4px 2px}
+.download{border:0;background:#edf5f4;color:#176b60;border-radius:12px;padding:10px 16px;font-weight:700}
+.download:hover{background:#dcefeb}
+.empty{background:#fff;border:2px solid var(--line);border-radius:28px;min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:35px 20px;margin-top:30px}
+.empty-icon{font-size:42px;background:#f7f6f2;border-radius:22px;padding:18px;margin-bottom:20px}
+.empty h3{font-size:25px;margin:0 0 12px}
+.empty p{color:var(--muted);font-size:18px;line-height:1.8;margin:0}
+.exam-schedule{width:100%;max-height:75vh;object-fit:contain;background:#fff;border:1px solid var(--line);border-radius:20px;padding:8px;cursor:zoom-in}
+.tomorrow{margin-top:48px}
+.tomorrow h3{font-size:28px;margin:0 0 24px}
+.exam-subject{font-size:22px;margin:28px 0 14px}
+.notice{padding:20px;border-radius:18px;background:#fff;border:1px solid var(--line);color:var(--muted);font-size:18px}
+footer{text-align:center;color:#777a80;border-top:1px solid var(--line);padding:30px 15px;font-size:16px}
+.viewer{position:fixed;inset:0;background:#101114ed;z-index:20;display:none;align-items:center;justify-content:center;padding:18px}
+.viewer.open{display:flex}
+.viewer img{max-width:100%;max-height:88vh;object-fit:contain}
+.viewer-close{position:absolute;top:18px;left:18px;border:0;border-radius:50%;width:46px;height:46px;background:#fff;color:#111;font-size:28px}
+.loading{color:var(--muted);padding:22px 0}
+@media(min-width:760px){.subject-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.gallery{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:480px){.topbar{height:68px}.brand{font-size:27px}.brand-icon{font-size:32px}.exam-link{font-size:14px}main{padding-top:34px}.hero{margin-bottom:48px}.subject-grid{gap:14px}.subject-card{min-height:164px;padding:20px 17px;border-radius:25px}.subject-icon{width:65px;height:65px;font-size:30px}.subject-name{font-size:21px}.subject-count{font-size:15px}.gallery{gap:12px}.photo-card{padding:7px;border-radius:17px}.download{padding:9px 12px;font-size:14px}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#" id="homeLink"><span class="brand-icon">📘</span><span>دروسي</span></a>
+  <a class="exam-link" href="#exams" id="examNav">الاختبارات <span aria-hidden="true">·</span> <span id="examStatus">جارٍ التحقق...</span></a>
+</header>
+<main id="app" aria-live="polite">
+  <div class="loading">جارٍ تحميل المحتوى...</div>
+</main>
+<footer>دروسي <span>·</span> الصف الأول الثانوي <span>·</span> دفترك معك، أينما كنت</footer>
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="عرض الصورة">
+  <button class="viewer-close" id="viewerClose" aria-label="إغلاق">×</button>
+  <img id="viewerImage" alt="صورة مكبرة">
+</div>
+<script>
+/* إعدادات GitHub */
+const GITHUB_OWNER = "bdyl27784-cell";
+const GITHUB_REPO = "notebook";
+const GITHUB_BRANCH = "main";
+
+/* المواد الدراسية */
+const SUBJECTS = [
+ {code:"quran",name:"القرآن الكريم",icon:"📖",color:"#e9faf3",ink:"#08765e"},
+ {code:"islamic",name:"التربية الإسلامية",icon:"▣",color:"#effbf9",ink:"#08796c"},
+ {code:"arabic",name:"اللغة العربية",icon:"▤",color:"#fff8e7",ink:"#a45a13"},
+ {code:"english",name:"اللغة الإنجليزية",icon:"文",color:"#eef7ff",ink:"#16719a"},
+ {code:"math",name:"الرياضيات",icon:"∑",color:"#f0f6ff",ink:"#2764a4"},
+ {code:"physics",name:"الفيزياء",icon:"⚛",color:"#f2f5ff",ink:"#4b62a5"},
+ {code:"chemistry",name:"الكيمياء",icon:"⚗",color:"#f5f0ff",ink:"#7136a5"},
+ {code:"biology",name:"الأحياء",icon:"🧬",color:"#eafafa",ink:"#08788a"},
+ {code:"history",name:"التاريخ",icon:"♜",color:"#fff4eb",ink:"#a64b20"},
+ {code:"geography",name:"الجغرافيا",icon:"◎",color:"#f3fbe9",ink:"#56851a"},
+ {code:"community",name:"المجتمع",icon:"♧",color:"#fff0f3",ink:"#ad3155"},
+ {code:"computer",name:"الحاسوب",icon:"▣",color:"#edf2ff",ink:"#465da8"}
+];
+
+const app=document.getElementById("app");
+const statusEl=document.getElementById("examStatus");
+let files=[];
+const rawBase=`https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${GITHUB_BRANCH}/`;
+const apiUrl=`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents?ref=${GITHUB_BRANCH}`;
+
+function localTomorrow(){
+ const parts=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Aden",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());
+ const p=Object.fromEntries(parts.map(x=>[x.type,x.value]));
+ const d=new Date(Date.UTC(+p.year,+p.month-1,+p.day+1));
+ return `${d.getUTCFullYear()}-${String(d.getUTCMonth()+1).padStart(2,"0")}-${String(d.getUTCDate()).padStart(2,"0")}`;
+}
+
+function isImage(name){return /\.(jpe?g|png|webp|gif)$/i.test(name)}
+function imageUrl(file){return file.download_url || rawBase+encodeURIComponent(file.name)}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+
+async function loadFiles(){
+ const r=await fetch(apiUrl,{headers:{"Accept":"application/vnd.github+json"}});
+ if(!r.ok) throw new Error(r.status===403?"تجاوز الموقع حد طلبات GitHub مؤقتاً. حاول بعد قليل.":"تعذر قراءة المستودع. تحقق من اسم الحساب والمستودع وأنه عام.");
+ const data=await r.json();
+ if(!Array.isArray(data)) throw new Error("لم يتم العثور على ملفات المستودع.");
+ files=data.filter(x=>x.type==="file"&&isImage(x.name));
+ const schedule=files.some(x=>/^exam-table__main\./i.test(x.name));
+ statusEl.textContent=schedule?"توجد اختبارات":"لا توجد اختبارات";
+}
+
+function card(s){
+ const count=files.filter(f=>f.name.toLowerCase().startsWith(s.code+"__")).length;
+ return `<button class="subject-card" data-subject="${s.code}" style="font-family:inherit">
+ <div class="card-top"><span class="subject-icon" style="background:${s.color};color:${s.ink}">${s.icon}</span><span class="chevron">‹</span></div>
+ <div><div class="subject-name">${s.name}</div><div class="subject-count">${count?`${count} صورة`:"لا توجد صور بعد"}</div></div></button>`;
+}
+
+function home(){
+ app.innerHTML=`<section class="hero"><div class="hero-brand"><span class="brand-icon">📘</span><div><h1>دروسي</h1><div class="tagline">دفترك معك، أينما كنت</div></div></div>
+ <p class="intro">دفاتر الصف الأول الثانوي وتحديدات الاختبارات في مكان واحد، لتجد ما فاتك بسهولة</p></section>
+ <h2 class="section-title">المواد الدراسية</h2><section class="subject-grid">${SUBJECTS.map(card).join("")}</section>`;
+ app.querySelectorAll("[data-subject]").forEach(b=>b.addEventListener("click",()=>showSubject(b.dataset.subject)));
+}
+
+function photoCard(f){
+ const url=imageUrl(f);
+ return `<article class="photo-card"><img loading="lazy" src="${escapeHtml(url)}" alt="${escapeHtml(f.name)}" data-view="${escapeHtml(url)}"><div class="photo-actions"><button class="download" data-download="${escapeHtml(url)}" data-name="${escapeHtml(f.name)}">⬇ تحميل الصورة</button></div></article>`;
+}
+
+function bindPhotos(){
+ app.querySelectorAll("[data-view]").forEach(img=>img.addEventListener("click",()=>openViewer(img.dataset.view)));
+ app.querySelectorAll("[data-download]").forEach(b=>b.addEventListener("click",()=>downloadImage(b.dataset.download,b.dataset.name,b)));
+}
+
+function showSubject(code){
+ const s=SUBJECTS.find(x=>x.code===code);if(!s)return;
+ const imgs=files.filter(f=>f.name.toLowerCase().startsWith(code+"__")).sort((a,b)=>a.name.localeCompare(b.name,undefined,{numeric:true}));
+ app.innerHTML=`<section class="page-head"><a class="back" href="#" id="backHome">→ العودة إلى الرئيسية</a><div class="page-title-row"><span class="subject-icon" style="background:${s.color};color:${s.ink};width:82px;height:82px">${s.icon}</span><div><h2>${s.name}</h2><p class="page-subtitle">${imgs.length?`${imgs.length} صورة متاحة`:"لا توجد صور مضافة حالياً"}</p></div></div></section>
+ ${imgs.length?`<section class="gallery">${imgs.map(photoCard).join("")}</section>`:`<section class="empty"><div class="empty-icon">${s.icon}</div><h3>لم تتم إضافة صور لهذه المادة بعد</h3><p>سيتم عرض صفحات الدفتر هنا تلقائياً فور إضافتها.</p></section>`}`;
+ document.getElementById("backHome").addEventListener("click",e=>{e.preventDefault();home();window.scrollTo(0,0)});
+ bindPhotos();window.scrollTo(0,0);
+}
+
+function showExams(){
+ const tomorrow=localTomorrow();
+ const schedule=files.find(f=>/^exam-table__main\./i.test(f.name));
+ const daily=files.filter(f=>f.name.startsWith("tomorrow__"+tomorrow+"__")).sort((a,b)=>a.name.localeCompare(b.name,undefined,{numeric:true}));
+ let groups={};
+ daily.forEach(f=>{const m=f.name.match(/^tomorrow__\d{4}-\d{2}-\d{2}__([a-z]+)__/i);if(m)(groups[m[1]]??=[]).push(f)});
+ const scheduleHtml=schedule?`<img class="exam-schedule" data-view="${escapeHtml(imageUrl(schedule))}" src="${escapeHtml(imageUrl(schedule))}" alt="جدول الاختبارات"><div class="photo-actions"><button class="download" data-download="${escapeHtml(imageUrl(schedule))}" data-name="${escapeHtml(schedule.name)}">⬇ تحميل الجدول</button></div>`:`<div class="notice">لا توجد اختبارات</div>`;
+ const groupHtml=Object.keys(groups).length?Object.entries(groups).map(([code,arr])=>{
+  const s=SUBJECTS.find(x=>x.code===code);return `<h4 class="exam-subject">${s?s.name:escapeHtml(code)}</h4><section class="gallery">${arr.map(photoCard).join("")}</section>`;
+ }).join(""):`<div class="notice">لا توجد اختبارات غداً، نتمنى لكم التوفيق.</div>`;
+ app.innerHTML=`<section class="page-head"><a class="back" href="#" id="backHome">→ العودة إلى الرئيسية</a><div class="page-title-row"><div><h2>جدول الاختبارات</h2><p class="page-subtitle">جدول الاختبارات وتحديدات اليوم التالي</p></div></div></section>
+ ${scheduleHtml}<section class="tomorrow"><h3>اختبار الغد</h3>${groupHtml}</section>`;
+ document.getElementById("backHome").addEventListener("click",e=>{e.preventDefault();home();window.scrollTo(0,0)});
+ bindPhotos();window.scrollTo(0,0);
+}
+
+async function downloadImage(url,name,button){
+ const old=button.textContent;button.disabled=true;button.textContent="جارٍ التحميل...";
+ try{
+  const r=await fetch(url);if(!r.ok)throw new Error();
+  const blob=await r.blob();const objectUrl=URL.createObjectURL(blob);
+  const a=document.createElement("a");a.href=objectUrl;a.download=name||"daftar-image";document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(objectUrl),1500);
+ }catch(e){window.open(url,"_blank","noopener");}
+ finally{button.disabled=false;button.textContent=old}
+}
+
+function openViewer(url){document.getElementById("viewerImage").src=url;document.getElementById("viewer").classList.add("open")}
+function closeViewer(){document.getElementById("viewer").classList.remove("open");document.getElementById("viewerImage").src=""}
+
+document.getElementById("viewerClose").addEventListener("click",closeViewer);
+document.getElementById("viewer").addEventListener("click",e=>{if(e.target.id==="viewer")closeViewer()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeViewer()});
+document.getElementById("homeLink").addEventListener("click",e=>{e.preventDefault();home();window.scrollTo(0,0)});
+document.getElementById("examNav").addEventListener("click",e=>{e.preventDefault();showExams()});
+
+(async()=>{try{await loadFiles();home()}catch(e){statusEl.textContent="تعذر الاتصال";app.innerHTML=`<section class="empty"><div class="empty-icon">📘</div><h3>تعذر تحميل محتوى دروسي</h3><p>${escapeHtml(e.message)}<br>تأكد من إعدادات GitHub ثم أعد تحميل الصفحة.</p></section>`}})();
+</script>
+</body>
+</html>
